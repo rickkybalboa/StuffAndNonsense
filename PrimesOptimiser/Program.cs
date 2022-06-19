@@ -1,4 +1,6 @@
-﻿class PrimesOptimiser
+﻿// My primes optimiser don't jiggle it folds
+
+class PrimesOptimiser
 {
     static TimeSpan GetPrimes(double limit)
     {
