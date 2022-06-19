@@ -16,7 +16,7 @@
             {
                 // If a number is not prime it can be factored into n = a * b.
                 // At least one of a or b must be less than sqrt(n), else sqrt(a) * sqrt(b) > n.
-                // Hence if no factors less than or equal to sqrt(n), n == prime. This radically lowers computation time.
+                // Hence if no factors less than or equal to sqrt(n), n == prime. This substantially lowers computation time.
                 var m = (int)Math.Sqrt(i);
 
                 // the switch block further reduces calculation time by half:
@@ -45,11 +45,11 @@
         }
 
 
-        timer.Stop(); var time = timer.Elapsed; Console.WriteLine(time);
+        timer.Stop(); var time = timer.Elapsed; //Console.WriteLine(time);
 
         //for (int k = 0; k < primes.Count; k++)
         //    Console.WriteLine(primes[k]);
-        Console.WriteLine($"Number of primes is {primes.Count}");
+        Console.WriteLine($"Number of primes between 0 and {limit} is {primes.Count}");
 
         return time;
     }
@@ -57,7 +57,7 @@
     static void Main()
     {
 
-        Console.WriteLine(GetPrimes(1E6));
+        Console.WriteLine("Code execuction time was " + GetPrimes(1E6) + " seconds.");
     }
 
 }
