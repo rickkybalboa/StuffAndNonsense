@@ -14,9 +14,10 @@
                 primes.Add(i);
             else
             {
-                // If a number is not prime it can be factored into n = a * b.
-                // At least one of a or b must be less than sqrt(n), else sqrt(a) * sqrt(b) > n.
-                // Hence if no factors less than or equal to sqrt(n), n == prime. This substantially lowers computation time.
+                /* If a number is not prime it can be factored into n = a * b.
+                   At least one of a or b must be less than sqrt(n), else sqrt(a) * sqrt(b) > n.
+                   Hence if no factors less than or equal to sqrt(n), n == prime. This substantially lowers computation time.
+                */
                 var m = (int)Math.Sqrt(i);
 
                 // the switch block further reduces calculation time by half:
