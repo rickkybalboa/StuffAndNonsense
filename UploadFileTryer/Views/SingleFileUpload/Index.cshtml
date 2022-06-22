@@ -1,0 +1,89 @@
+﻿@model UploadFileTryer.Models.SingleFileModel
+@{
+    ViewData["Title"] = "Single File Upload";
+}
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+<form asp-action="Upload" asp-controller="SingleFileUpload" method="post" enctype = "multipart/form-data" id="theForm">
+    @*@if (Model.IsResponse)
+    {
+        if (Model.IsSuccess)
+        {
+            <div class="alert alert-success">
+                @Model.Message
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-danger">
+                @Model.Message
+            </div>
+        }
+    }*@
+
+    <div class="row mt-2 uploadFormFields">
+        <div class="col-12">
+            <label class="col-form-label">Enter the name of your event (e.g., Sports Day 2023)</label>
+            <input asp-for="FileName" class="form-control" id="Filename" />
+            <span asp-validation-for="FileName" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="row mt-2 uploadFormFields">
+        <div class="col-12">
+            <label class="col-form-label">Select Database File</label>
+            <input asp-for="File" class="form-control" name="File" id="file" />
+            <span asp-validation-for="File" class="text-danger"></span>
+        </div>
+    </div>
+
+
+    <div class="row mt-2 uploadFormFields">
+        <div class="col-12">
+            <button type="button" class="btn btn-success" id="uploadButton">Upload File</button>
+        </div>
+
+        <p><bold>After uploading the file, please wait for generation and download. The generation process takes approximately one second per event category.</bold></p>
+    </div>
+
+    <div id="statusMessage">
+
+    </div>    
+    
+</form>
+
+<script>
+$("#uploadButton").on('click', function() {
+
+    $("#statusMessage").html("Processing, please wait a moment");
+    var fd = new FormData();
+    var file = $('#file')[0].files[0];
+    fd.append('File', file);    
+    fd.append("Filename", $("#Filename").val());
+
+    $(".uploadFormFields").hide();
+
+    $.ajax({
+        type: "POST",
+        url: "SingleFileUpload/Upload",
+        data: fd,
+        dataType: "json",                
+        processData: false,
+        contentType: false
+    }).done(function(result) {
+        var linkToDownload = "";
+        if (result.success) {
+            $("#statusMessage").html("<a class='btn btn-warning' href='Generator/DownloadDocument'>Download Document</a>");
+        }
+        else if (result.Exception != undefined)
+        {
+            $("#statusMessage").html(result.Exception);
+        }
+        else {
+            $("#statusMessage").html("Error Occured During Processing");
+        }        
+    });
+});
+</script>

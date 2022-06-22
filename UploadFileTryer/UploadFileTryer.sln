@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32602.215
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UploadFileTryer", "UploadFileTryer.csproj", "{79ED7AE6-3547-499E-B440-B1BAA7B68493}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{79ED7AE6-3547-499E-B440-B1BAA7B68493}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79ED7AE6-3547-499E-B440-B1BAA7B68493}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79ED7AE6-3547-499E-B440-B1BAA7B68493}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79ED7AE6-3547-499E-B440-B1BAA7B68493}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8462DC96-3B5D-462F-89B0-51197BADC860}
+	EndGlobalSection
+EndGlobal
