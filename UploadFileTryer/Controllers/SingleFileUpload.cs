@@ -87,6 +87,21 @@ namespace UploadFileTryer.Controllers
             return Json(new { success = false });
 
         }
+
+        public IActionResult ClearData()
+        {
+            var pathOutput = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Files/Output.docx");
+            var pathDB = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Files/Events.xlsx");
+            if (System.IO.File.Exists(pathOutput) || System.IO.File.Exists(pathDB))
+            {
+                System.IO.File.Delete(pathOutput);
+                System.IO.File.Delete(pathDB);
+
+                return RedirectToAction("Index", "Home");
+            }
+            else
+                return RedirectToAction("Index","Home");
+        }
     }
 }
 

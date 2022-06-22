@@ -39,11 +39,32 @@ namespace UploadFileTryer.Controllers
             var path = (Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\Files\\Output.docx"));
             string fileName = "Output.docx";
 
-            byte[] fileBytes = System.IO.File.ReadAllBytes(path);
+            try
+            {
 
-            return File(fileBytes, "application/force-download", fileName);
+                byte[] fileBytes = System.IO.File.ReadAllBytes(path);
 
+                var pathOutput = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Files/Output.docx");
+                var pathDB = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Files/Events.xlsx");
 
+                // ADD METHOD TO DELETE FILES
+                System.IO.File.Delete(path);
+                System.IO.File.Delete(pathDB);
+
+                return File(fileBytes, "application/force-download", fileName);
+            }
+
+            catch (FileNotFoundException)
+            {
+                return RedirectToAction("NoDownload");
+            }
+            
+
+        }
+
+        public IActionResult NoDownload()
+        {
+            return View("NoDownload");
         }
     }
 }

@@ -6,6 +6,8 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
+
+
 <form asp-action="Upload" asp-controller="SingleFileUpload" method="post" enctype = "multipart/form-data" id="theForm">
     @*@if (Model.IsResponse)
     {
@@ -22,6 +24,12 @@
             </div>
         }
     }*@
+
+    <div id = "spinner" class="spinner-border text-primary" role="status">
+  <span class="sr-only"></span>
+    </div>
+
+ 
 
     <div class="row mt-2 uploadFormFields">
         <div class="col-12">
@@ -45,7 +53,7 @@
             <button type="button" class="btn btn-success" id="uploadButton">Upload File</button>
         </div>
 
-        <p><bold>After uploading the file, please wait for generation and download. The generation process takes approximately one second per event category.</bold></p>
+        <p><br /><bold>After uploading the file, please wait for generation and download. The generation process may take some time, depending on the number of event categories.</bold></p>
     </div>
 
     <div id="statusMessage">
@@ -57,7 +65,12 @@
 <script>
 $("#uploadButton").on('click', function() {
 
-    $("#statusMessage").html("Processing, please wait a moment");
+
+    $("#statusMessage").html("Processing, please wait. This may take a minute.");
+
+    document.getElementById("spinner").style.display = "";
+    
+
     var fd = new FormData();
     var file = $('#file')[0].files[0];
     fd.append('File', file);    
@@ -75,7 +88,11 @@ $("#uploadButton").on('click', function() {
     }).done(function(result) {
         var linkToDownload = "";
         if (result.success) {
+            document.getElementById("spinner").style.display = "none";
+            document.getElementById("advisoryMessage").style.display = "";
+
             $("#statusMessage").html("<a class='btn btn-warning' href='Generator/DownloadDocument'>Download Document</a>");
+            
         }
         else if (result.Exception != undefined)
         {
@@ -87,3 +104,20 @@ $("#uploadButton").on('click', function() {
     });
 });
 </script>
+
+
+
+<div id="advisoryMessage">
+    <p><br />
+    After you have downloaded the document, all data you have uploaded will be <strong>permanently</strong> deleted from the server. See the <a href="Home/Privacy">Privacy</a> page for more details on how data is handled.</p>
+
+    <p>
+  <a href = "Home/Index">Click here</a> to return to the Home page.
+    </p>
+</div>
+
+   <script>
+     document.getElementById("spinner").style.display = "none";
+     document.getElementById("advisoryMessage").style.display = "none";
+    </script>
+
